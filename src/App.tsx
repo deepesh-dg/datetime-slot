@@ -1,26 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { CSSProperties, useState } from 'react';
+import { DatetimeSlot } from './datetime-slot';
+import './App.scss';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [date, setDate] = useState<Date>();
+
+    const style: { [key: string]: CSSProperties } = {
+        app: {
+            padding: '1rem',
+            borderRadius: '1rem',
+            margin: '1rem auto',
+            width: '100%',
+            maxWidth: '400px',
+            boxShadow: '1px 1px 10px #d4d4d4',
+        },
+    };
+
+    return (
+        <>
+            <div style={style.app}>
+                <DatetimeSlot selectDate={(date) => setDate(date)} />
+            </div>
+            {date ? <div>{date.toLocaleString()}</div> : null}
+        </>
+    );
 }
 
 export default App;
